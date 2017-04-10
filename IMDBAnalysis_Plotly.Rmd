@@ -30,15 +30,15 @@ movies_without_FBols <- movies %>% filter(!(abs(actor_1_facebook_likes - median(
 ## IMDB score vs FB likes of both actor 1 and 2
 ```{r echo = FALSE}
 plot_ly(data = movies_without_FBols, x = ~actor_1_facebook_likes, y = ~actor_2_facebook_likes, z = ~imdb_score,
-        type = "scatter3d", color = ~imdb_score)
+        type = "scatter3d", color = ~title_year)
 ```
 
 ## IMDB score vs FB likes of the entire cast
 ```{r echo = FALSE}
-plot_ly(data = movies_without_FBols, x = ~cast_total_facebook_likes, y = ~imdb_score, type = "scatter", color = ~imdb_score)
+plot_ly(data = movies_without_FBols, x = ~cast_total_facebook_likes, y = ~imdb_score, type = "scatter", color = ~title_year)
 ```
 
 ## Conculsions
 - In general, the higher FB likes, the higher score in IMDB.  If you would like to pick a movie without knowing IMDB scores, it is safe to find one with cast members who are very popular on FB.  
 
-- However, many good movies with high scores also show low FB likes.  So don't just follow the FB trends.
+- However, many good movies with high scores also show low FB likes.  Most of them were shot in the first half of the last century, long before the internet era.
