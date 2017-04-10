@@ -39,6 +39,6 @@ plot_ly(data = movies_without_FBols, x = ~cast_total_facebook_likes, y = ~imdb_s
 ```
 
 ## Conculsions
-- In general, the higher FB likes, the higher score in IMDB.  If you would like to pick a movie without knowing IMDB scores, it is safe to find one with cast who are very popular on FB.  
+- In general, the higher FB likes, the higher score in IMDB.  If you would like to pick a movie without knowing IMDB scores, it is safe to find one with cast members who are very popular on FB.  
 
 - However, many good movies with high scores also show low FB likes.  So don't just follow the FB trends.
