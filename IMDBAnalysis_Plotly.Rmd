@@ -1,0 +1,44 @@
+---
+title: "IMDB Analysis"
+author: "Jin Huang"
+date: "April 9, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+library(dplyr)
+library(plotly)
+```
+
+## R Markdown
+This is an R Markdown presentation exploring IMDB 5000 Movie Dataset,  <https://www.kaggle.com/deepmatrix/imdb-5000-movie-dataset>.
+
+Espeically we would like to check the relationship between actors' facebook (FB) likes with IMDB score.  
+
+```{r echo = FALSE}
+# Read data from a local csv file downloaded from the website above
+movies <- read.csv('movie_metadata.csv', header=TRUE, stringsAsFactors = FALSE)
+
+# Remove any rows with NA
+movies <- movies[complete.cases(movies),]
+
+# Remove the outliers, which are defined as outside of 2 times of standard deviation
+movies_without_FBols <- movies %>% filter(!(abs(actor_1_facebook_likes - median(actor_1_facebook_likes)) >  2 * sd(actor_1_facebook_likes)))
+```
+
+## IMDB score vs FB likes of both actor 1 and 2
+```{r echo = FALSE}
+plot_ly(data = movies_without_FBols, x = ~actor_1_facebook_likes, y = ~actor_2_facebook_likes, z = ~imdb_score,
+        type = "scatter3d", color = ~imdb_score)
+```
+
+## IMDB score vs FB likes of the entire cast
+```{r echo = FALSE}
+plot_ly(data = movies_without_FBols, x = ~cast_total_facebook_likes, y = ~imdb_score, type = "scatter", color = ~imdb_score)
+```
+
+## Conculsions
+- In general, the higher FB likes, the higher score in IMDB.  If you would like to pick a movie without knowing IMDB scores, it is safe to find one with cast who are very popular on FB.  
+
+- However, many good movies with high scores also show low FB likes.  So don't just follow the FB trends.
